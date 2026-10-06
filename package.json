@@ -1,0 +1,51 @@
+{
+  "name": "dsh-permanent-delete",
+  "version": "0.2.0",
+  "description": "DeepSeek Harness plugin, CLI and sidebar action for permanently deleting JSONL-backed sessions.",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "dsh-delete-session": "./bin/dsh-delete-session.js"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "scripts/",
+    "index.js",
+    "client.js",
+    "build.mjs",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "prepare": "node build.mjs",
+    "test": "node --test"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ],
+      "external": [
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ]
+    }
+  },
+  "peerDependencies": {},
+  "devDependencies": {}
+}
