@@ -1,10 +1,16 @@
 {
   "name": "dsh-permanent-delete",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "DeepSeek Harness plugin, CLI and sidebar action for permanently deleting JSONL-backed sessions.",
   "license": "MIT",
   "type": "module",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maoyu691/dsh-permanent-delete.git"
+  },
+  "homepage": "https://github.com/maoyu691/dsh-permanent-delete",
+  "bugs": "https://github.com/maoyu691/dsh-permanent-delete/issues",
   "exports": {
     ".": "./index.js",
     "./client": "./lib/client.js",
@@ -28,7 +34,6 @@
   ],
   "scripts": {
     "build": "node build.mjs",
-    "prepare": "node build.mjs",
     "test": "node --test"
   },
   "dsh": {

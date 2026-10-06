@@ -43,38 +43,38 @@ DeepSeek Harness 桌面版与 CLI／源码启动方式使用的是同一套可�
 
 ## 从 GitHub 仓库地址安装
 
-把 `<owner>` 换成托管该仓库的 GitHub 账号。
+如果你把这个仓库 fork 到了别的账号下，把下面的 `maoyu691` 换成你自己的用户名。
 
 桌面端「添加插件」输入框，填下面任意一个：
 
 ```text
-https://github.com/<owner>/dsh-permanent-delete.git
+https://github.com/maoyu691/dsh-permanent-delete.git
 ```
 
 或 npm 简写：
 
 ```text
-github:<owner>/dsh-permanent-delete
+github:maoyu691/dsh-permanent-delete
 ```
 
 命令行：
 
 ```powershell
-dsh plugin --profile desktop add https://github.com/<owner>/dsh-permanent-delete.git
+dsh plugin --profile desktop add https://github.com/maoyu691/dsh-permanent-delete.git
 ```
 
 只想装 CLI 可执行文件的话，用 npm：
 
 ```sh
-npm i -g github:<owner>/dsh-permanent-delete
+npm i -g github:maoyu691/dsh-permanent-delete
 ```
 
-要锁定版本，在末尾加上 `#main`、标签（如 `#v0.2.0`）或完整 commit SHA。
+要锁定版本，在末尾加上 `#main`、标签（如 `#v0.2.1`）或完整 commit SHA。
 
 几点说明：
 
-- `lib/client.js` 已提交进仓库，因此即使安装器跳过了构建步骤，侧边栏菜单依然可用。
-- 包里声明了 `prepare` 脚本（`node build.mjs`），走 npm 的 git 安装会自动重新构建产物。
+- **安装时不会跑任何构建步骤。** `lib/client.js` 已提交进仓库，并且本包**故意不提供** `prepare` / `install` 脚本。这是刻意为之：DeepSeek Harness 的 `desktop` profile 使用 pnpm，而 pnpm 默认禁止 git 依赖执行构建脚本——除非在 `pnpm-workspace.yaml` 的 `allowBuilds` 里显式放行，否则会直接报 `ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED` 导致安装失败。
+- 如果你改了 `client.js`，请执行 `node build.mjs`（或 `npm run build`），并把重新生成的 `lib/client.js` 一起提交。
 - 公开仓库安装无需凭证；私有仓库需要在执行安装的机器上准备 PAT 或 SSH 密钥。
 
 ## 配置会话根目录

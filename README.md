@@ -43,38 +43,38 @@ DeepSeek Harness Desktop uses the same installable bundle system as the CLI/sour
 
 ## Install from a GitHub repository
 
-Replace `<owner>` with the GitHub account that hosts this repo.
+Replace `maoyu691` below if you fork this repo under a different account.
 
 Desktop UI — paste one of these into the **Add plugin** input:
 
 ```text
-https://github.com/<owner>/dsh-permanent-delete.git
+https://github.com/maoyu691/dsh-permanent-delete.git
 ```
 
 or the npm shorthand:
 
 ```text
-github:<owner>/dsh-permanent-delete
+github:maoyu691/dsh-permanent-delete
 ```
 
 Command line:
 
 ```powershell
-dsh plugin --profile desktop add https://github.com/<owner>/dsh-permanent-delete.git
+dsh plugin --profile desktop add https://github.com/maoyu691/dsh-permanent-delete.git
 ```
 
 Plain npm, if you only want the CLI binary:
 
 ```sh
-npm i -g github:<owner>/dsh-permanent-delete
+npm i -g github:maoyu691/dsh-permanent-delete
 ```
 
-To pin a revision, append a committish: `#main`, a tag such as `#v0.2.0`, or a full commit SHA.
+To pin a revision, append a committish: `#main`, a tag such as `#v0.2.1`, or a full commit SHA.
 
 Notes:
 
-- `lib/client.js` is committed to the repo, so the sidebar menu works even if the installer skips the build step.
-- The package declares a `prepare` script (`node build.mjs`), so npm-based git installs rebuild the bundle automatically.
+- **No build step runs at install time.** `lib/client.js` is committed to the repo and the package deliberately ships **no** `prepare` or `install` script. This is deliberate: pnpm — which the DeepSeek Harness `desktop` profile uses — refuses to run build scripts for git-hosted packages unless they are allowlisted under `allowBuilds` in `pnpm-workspace.yaml`, and fails with `ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED` otherwise.
+- If you edit `client.js`, run `node build.mjs` (or `npm run build`) and commit the regenerated `lib/client.js`.
 - A public repo installs without credentials. A private repo needs a PAT or SSH key on the machine doing the install.
 
 ## Configure the session root
